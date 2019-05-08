@@ -1,15 +1,21 @@
 package com.mirolyubov;
 
-import java.util.concurrent.*;
+import org.junit.Test;
 
-public class Main {
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
-    public static final int NUMBER_OF_TRANSACTIONS = 10000;
-    public static final int NUMBER_OF_THREADS = 30;
+import static org.junit.Assert.*;
+
+public class MainTest {
+
+    public static final int NUMBER_OF_TRANSACTIONS = 1000;
+    public static final int NUMBER_OF_THREADS = 20;
     public static final int NUMBER_OF_ACCOUNTS = 10;
 
-    public static void main(String[] args) {
-
+    @Test
+    public void main() {
         ZeroPosition zeroPosition = new ZeroPosition();
         zeroPosition.setAccountsZeroPosition();
 
@@ -31,9 +37,7 @@ public class Main {
 
         System.out.println(AccountRepository.getInstance().getAccountList());
         System.out.println("Overall balance " + accountOperations.getBalanceOfAllAccounts());
-        System.out.println("Success operations " + Counter.counter.get());
-        System.out.println("Number of tries " + Counter.counter2.get());
-        System.out.println("Unsuccess operations " + Counter.counter4.get());
-
+        System.out.println("Success operations " + Counter.getCounter());
+        System.out.println("Number of tries " + Counter.counter2);
     }
 }

@@ -1,10 +1,14 @@
 package com.mirolyubov;
 
+import com.mirolyubov.utils.AccountUtilsOperations;
+import com.mirolyubov.utils.TransactionGenerator;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -35,7 +39,9 @@ public class AccountOperations {
         return balance;
     }
 
-    public List<Account> getPairAccount() {
+    public void getPairAccount() {
+
+
 
         Random rand = new Random();
         List<Account> accountList = AccountRepository.getInstance().getAccountList();
@@ -45,24 +51,6 @@ public class AccountOperations {
         int randomElement = rand.nextInt(arraySize);
 
         Account firstAccount = accountList.get(randomElement);
-
-        firstAccount.getLock().lock();
-
-        if (firstAccount.isLock()) {
-            while (firstAccount.isLock()) {
-                try {
-                    wait(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            firstAccount.setLock(true);
-            pair.add(firstAccount);
-        } else {
-            firstAccount.setLock(true);
-            pair.add(firstAccount);
-        }
-
 
         int nextRandomElement = rand.nextInt(arraySize);
 
@@ -74,21 +62,41 @@ public class AccountOperations {
 
         Account secondAccount = accountList.get(nextRandomElement);
 
-        if (secondAccount.isLock()) {
-            while (secondAccount.isLock()) {
-                try {
-                    wait(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            secondAccount.setLock(true);
-            pair.add(secondAccount);
-        } else {
-            secondAccount.setLock(true);
-            pair.add(secondAccount);
-        }
+        Counter.counter3++;
 
-        return pair;
+        ReentrantLock firstLock = firstAccount.getId() < secondAccount.getId() ?
+                firstAccount.getLock() : secondAccount.getLock();
+        firstLock.lock();
+
+        ReentrantLock secondLock = firstAccount.getId() > secondAccount.getId() ?
+                firstAccount.getLock() : secondAccount.getLock();
+        secondLock.lock();
+
+        Counter.counter2.incrementAndGet();
+
+        AccountUtilsOperations accountUtilsOperations = new AccountUtilsOperations();
+
+        boolean isTransactionAvailable = accountUtilsOperations.isTransactionAvailable(firstAccount);
+
+        if (isTransactionAvailable) {
+            long amount = ThreadLocalRandom.current().nextLong(2000);
+//            transferMoney(firstAccount, secondAccount, amount);
+            if (firstAccount.getBalance()< amount) {
+                firstLock.unlock();
+                secondLock.unlock();
+                Counter.counter4.incrementAndGet();
+                return;
+            }
+            firstAccount.setBalance(firstAccount.getBalance() - amount);
+            secondAccount.setBalance(secondAccount.getBalance() + amount);
+            Counter.counter.incrementAndGet();
+            firstLock.unlock();
+            secondLock.unlock();
+
+        } else {
+            firstLock.unlock();
+            secondLock.unlock();
+            System.out.println("sdgfsdgsh");//Допилить исключение
+        }
     }
 }

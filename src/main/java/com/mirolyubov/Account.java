@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Account implements Serializable {
     private long id;
-    private ReentrantLock lock;
+    private ReentrantLock lock = new ReentrantLock();
     private volatile long balance;
 //    private volatile boolean isLock;
 
@@ -44,7 +44,6 @@ public class Account implements Serializable {
         return "Account{" +
                 "id=" + id +
                 ", balance=" + balance +
-                ", isLock=" + isLock +
                 '}';
     }
 }
