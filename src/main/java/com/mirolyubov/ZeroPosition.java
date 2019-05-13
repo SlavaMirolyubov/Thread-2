@@ -1,9 +1,9 @@
 package com.mirolyubov;
 
+import com.mirolyubov.entity.Account;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ZeroPosition {

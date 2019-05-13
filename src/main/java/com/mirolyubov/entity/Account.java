@@ -1,4 +1,4 @@
-package com.mirolyubov;
+package com.mirolyubov.entity;
 
 import java.io.Serializable;
 import java.util.concurrent.locks.ReentrantLock;

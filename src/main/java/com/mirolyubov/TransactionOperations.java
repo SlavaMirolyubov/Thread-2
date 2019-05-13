@@ -1,19 +1,16 @@
 package com.mirolyubov;
 
-import com.mirolyubov.utils.AccountUtilsOperations;
-import com.mirolyubov.utils.TransactionGenerator;
-
-import java.util.List;
+import com.mirolyubov.entity.Account;
 
 public class TransactionOperations {
 
     public void makeTransaction() {
 
 //        AccountOperations accountOperations = new AccountOperations();
-//        TransactionGenerator transactionGenerator = new TransactionGenerator();
+//        TransactionUtilGenerator transactionGenerator = new TransactionUtilGenerator();
 //        AccountUtilsOperations accountUtilsOperations = new AccountUtilsOperations();
 //
-//        List<Account> accountList = accountOperations.getPairAccount();
+//        List<Account> accountList = accountOperations.makeTransaction();
 //        Account firstAccount = accountList.get(0);
 //        Account secondAccount = accountList.get(1);
 //

@@ -1,14 +1,16 @@
 package com.mirolyubov;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import com.mirolyubov.entity.Transaction;
+import com.mirolyubov.services.AccountOperations;
+import com.mirolyubov.utils.AccountUtilsOperations;
+import com.mirolyubov.utils.TransactionUtilGenerator;
 
 public class ThreadTransaction implements Runnable {
 
     @Override
     public void run() {
-
-        new AccountOperations().getPairAccount();
-
+        AccountUtilsOperations accountUtilsOperations = new AccountUtilsOperations();
+        Transaction transaction = accountUtilsOperations.getTransactionEntity();
+        new AccountOperations().makeTransaction(transaction.getFirstAccount(), transaction.getSecondAccount(), transaction.getAmount());
     }
 }
