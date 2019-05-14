@@ -15,15 +15,14 @@ public class AccountUtilsOperations {
     private static Logger logger = Logger.getLogger(AccountUtilsOperations.class);
 
     public long getBalanceOfAllAccounts() {
-        long balance = 0;
+        long balance;
         List<Account> accountList = AccountRepository.getInstance().getAccountList();
-        for (Account account : accountList) {
-            balance += account.getBalance();
-        }
+        balance = accountList.stream().mapToLong(Account::getBalance).sum();
         return balance;
     }
 
-    public boolean checkEnoughBalanceForTransaction(Account firstAccount, long amount, ReentrantLock firstLock, ReentrantLock secondLock) {
+    public boolean checkEnoughBalanceForTransaction(Account firstAccount, long amount,
+                                                    ReentrantLock firstLock, ReentrantLock secondLock) {
         if (firstAccount.getBalance() < amount) {
             firstLock.unlock();
             secondLock.unlock();

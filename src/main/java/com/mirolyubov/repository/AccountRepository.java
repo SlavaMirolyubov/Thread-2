@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AccountRepository {
@@ -23,16 +24,19 @@ public class AccountRepository {
         File directory = new File("accounts");
         File[] arrayFiles = directory.listFiles();
         accountList = new ArrayList<>();
+
         if (arrayFiles != null) {
-            for (File file : arrayFiles) {
-                try (ObjectInputStream objectInputStream = new ObjectInputStream(
-                        new FileInputStream(file.getPath()))) {
-                    Account account = (Account) objectInputStream.readObject();
-                    accountList.add(account);
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
+            Arrays.stream(arrayFiles)
+                    .forEach(x -> {
+                        try (ObjectInputStream objectInputStream = new ObjectInputStream(
+                                new FileInputStream(x.getPath()))) {
+                            Account account = (Account) objectInputStream.readObject();
+                            accountList.add(account);
+                        } catch (IOException | ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    });
+
         }
     }
 
