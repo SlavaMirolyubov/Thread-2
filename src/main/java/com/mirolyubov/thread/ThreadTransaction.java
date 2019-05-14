@@ -1,9 +1,8 @@
-package com.mirolyubov;
+package com.mirolyubov.thread;
 
 import com.mirolyubov.entity.Transaction;
 import com.mirolyubov.services.AccountOperations;
 import com.mirolyubov.utils.AccountUtilsOperations;
-import com.mirolyubov.utils.TransactionUtilGenerator;
 
 public class ThreadTransaction implements Runnable {
 

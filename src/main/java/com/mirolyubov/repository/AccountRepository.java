@@ -1,4 +1,4 @@
-package com.mirolyubov;
+package com.mirolyubov.repository;
 
 import com.mirolyubov.entity.Account;
 
@@ -12,12 +12,6 @@ import java.util.List;
 public class AccountRepository {
 
     private static AccountRepository instance;
-
-    public volatile static int count;
-
-    public static int getCount() {
-        return count;
-    }
 
     private List<Account> accountList;
 
@@ -42,12 +36,10 @@ public class AccountRepository {
         }
     }
 
-        public static AccountRepository getInstance() {
+    public static AccountRepository getInstance() {
         if(instance == null) {
             instance = new AccountRepository();
         }
-
-        count++;
         return instance;
     }
 

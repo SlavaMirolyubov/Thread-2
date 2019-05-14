@@ -1,8 +1,7 @@
 package com.mirolyubov.utils;
 
 import com.mirolyubov.entity.Account;
-import com.mirolyubov.AccountRepository;
-import com.mirolyubov.Counter;
+import com.mirolyubov.repository.AccountRepository;
 import com.mirolyubov.entity.Transaction;
 import com.mirolyubov.exceptions.NotEnoughMoneyException;
 import org.apache.log4j.Logger;
@@ -45,11 +44,7 @@ public class AccountUtilsOperations {
         List<Account> accountList = AccountRepository.getInstance().getAccountList();
         int arraySize = accountList.size();
         int randomElement = rand.nextInt(arraySize);
-
-
-
         int nextRandomElement = rand.nextInt(arraySize);
-
         if (randomElement == nextRandomElement) {
             while (randomElement == nextRandomElement) {
                 nextRandomElement = rand.nextInt(arraySize);

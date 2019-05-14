@@ -1,16 +1,10 @@
 package com.mirolyubov.services;
 
 import com.mirolyubov.entity.Account;
-import com.mirolyubov.AccountRepository;
-import com.mirolyubov.Counter;
-import com.mirolyubov.entity.Transaction;
+import com.mirolyubov.utils.Counter;
 import com.mirolyubov.utils.AccountUtilsOperations;
-import com.mirolyubov.utils.TransactionUtilGenerator;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class AccountOperations {

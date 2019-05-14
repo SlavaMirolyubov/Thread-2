@@ -1,7 +1,9 @@
 package com.mirolyubov;
 
-import com.mirolyubov.services.AccountOperations;
+import com.mirolyubov.thread.ThreadTransaction;
 import com.mirolyubov.utils.AccountUtilsOperations;
+import com.mirolyubov.utils.Counter;
+import com.mirolyubov.services.ZeroPosition;
 import org.apache.log4j.Logger;
 
 import java.util.concurrent.*;
@@ -20,11 +22,7 @@ public class Main {
 
         ZeroPosition zeroPosition = new ZeroPosition();
         zeroPosition.setAccountsZeroPosition();
-
         AccountUtilsOperations accountUtilsOperations = new AccountUtilsOperations();
-
-
-
         ExecutorService service = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
         IntStream.range(0, NUMBER_OF_TRANSACTIONS)
                 .forEach(x -> service.submit(new ThreadTransaction()));

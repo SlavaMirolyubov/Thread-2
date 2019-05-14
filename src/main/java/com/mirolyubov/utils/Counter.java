@@ -1,4 +1,4 @@
-package com.mirolyubov;
+package com.mirolyubov.utils;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

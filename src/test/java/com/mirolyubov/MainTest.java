@@ -1,6 +1,10 @@
 package com.mirolyubov;
 
+import com.mirolyubov.repository.AccountRepository;
 import com.mirolyubov.services.AccountOperations;
+import com.mirolyubov.thread.ThreadTransaction;
+import com.mirolyubov.utils.Counter;
+import com.mirolyubov.services.ZeroPosition;
 import org.junit.Test;
 
 import java.util.concurrent.ExecutorService;

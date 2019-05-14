@@ -1,5 +1,6 @@
-package com.mirolyubov;
+package com.mirolyubov.services;
 
+import com.mirolyubov.Main;
 import com.mirolyubov.entity.Account;
 import org.apache.commons.io.FileUtils;
 
